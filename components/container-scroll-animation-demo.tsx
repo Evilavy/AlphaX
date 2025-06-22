@@ -50,7 +50,6 @@ export default function HeroScrollDemo() {
 
       setSuccess(true);
       setEmail("");
-      
     } catch (err: any) {
       setError(err.message);
       setTimeout(() => setError(""), 4000);
@@ -104,31 +103,31 @@ export default function HeroScrollDemo() {
                               transform: `rotate(${i * 45}deg)`,
                             }}
                             initial={{ scaleY: 0, opacity: 0 }}
-                            animate={{ 
+                            animate={{
                               scaleY: [0, 1, 0],
                               opacity: [0, 0.6, 0],
                             }}
-                            transition={{ 
+                            transition={{
                               duration: 2,
                               delay: i * 0.1,
-                              ease: "easeOut"
+                              ease: "easeOut",
                             }}
                           />
                         ))}
                       </div>
 
                       {/* Elite badge */}
-                      <motion.div 
+                      <motion.div
                         className="relative bg-gradient-to-b from-gray-900 via-black to-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl backdrop-blur-sm overflow-hidden"
-                        initial={{ 
-                          boxShadow: "0 0 0 0 rgba(0, 0, 0, 0.3)" 
+                        initial={{
+                          boxShadow: "0 0 0 0 rgba(0, 0, 0, 0.3)",
                         }}
-                        animate={{ 
+                        animate={{
                           boxShadow: [
                             "0 0 0 0 rgba(0, 0, 0, 0.3)",
                             "0 0 60px 0 rgba(0, 0, 0, 0.4)",
-                            "0 0 0 0 rgba(0, 0, 0, 0.3)"
-                          ]
+                            "0 0 0 0 rgba(0, 0, 0, 0.3)",
+                          ],
                         }}
                         transition={{ duration: 2, repeat: 1 }}
                       >
@@ -141,11 +140,11 @@ export default function HeroScrollDemo() {
                         <motion.div
                           initial={{ scale: 0, rotate: -180 }}
                           animate={{ scale: 1, rotate: 0 }}
-                          transition={{ 
-                            delay: 0.3, 
-                            type: "spring", 
+                          transition={{
+                            delay: 0.3,
+                            type: "spring",
                             stiffness: 200,
-                            damping: 15
+                            damping: 15,
                           }}
                           className="w-20 h-20 bg-gradient-to-br from-white via-gray-200 to-gray-400 rounded-full flex items-center justify-center mx-auto mb-6 relative shadow-2xl"
                         >
@@ -167,11 +166,15 @@ export default function HeroScrollDemo() {
                           <motion.div
                             className="absolute inset-0 border-2 border-gray-300 rounded-full"
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                            transition={{
+                              duration: 3,
+                              repeat: Infinity,
+                              ease: "linear",
+                            }}
                           />
                         </motion.div>
-                        
-                        <motion.h2 
+
+                        <motion.h2
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: 0.8 }}
@@ -179,7 +182,7 @@ export default function HeroScrollDemo() {
                         >
                           You're on the List
                         </motion.h2>
-                        
+
                         <motion.div
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
@@ -192,19 +195,25 @@ export default function HeroScrollDemo() {
                             </span>
                           </div>
                           <p className="text-gray-300 text-lg leading-relaxed">
-                            You'll be notified first when we launch and your $5 early bird price is secured.
+                            You'll be notified first when we launch and your $5
+                            early bird price is secured.
                           </p>
                         </motion.div>
-                        
-                        <motion.div 
+
+                        <motion.div
                           initial={{ opacity: 0, scale: 0.8 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: 1.2 }}
                           className="flex items-center justify-center space-x-3 text-gray-400 border-t border-gray-800 pt-6"
                         >
                           <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                          <span className="font-medium tracking-wide">First to know • $5 launch price guaranteed</span>
-                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
+                          <span className="font-medium tracking-wide">
+                            First to know • $5 launch price guaranteed
+                          </span>
+                          <div
+                            className="w-2 h-2 bg-white rounded-full animate-pulse"
+                            style={{ animationDelay: "0.5s" }}
+                          />
                         </motion.div>
 
                         {/* Premium corners */}
@@ -256,7 +265,10 @@ export default function HeroScrollDemo() {
                                   className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500"
                                   initial={{ x: "-100%" }}
                                   animate={{ x: "100%" }}
-                                  transition={{ duration: 1.5, repeat: Infinity }}
+                                  transition={{
+                                    duration: 1.5,
+                                    repeat: Infinity,
+                                  }}
                                 />
                               )}
                               <span className="relative z-10">
@@ -266,7 +278,6 @@ export default function HeroScrollDemo() {
                           </motion.div>
                         </div>
                       </form>
-
                       <AnimatePresence>
                         {error && (
                           <motion.div
@@ -289,7 +300,7 @@ export default function HeroScrollDemo() {
                   )}
                 </AnimatePresence>
 
-                <motion.div 
+                <motion.div
                   className="flex items-center justify-center space-x-8 text-sm text-gray-500"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
