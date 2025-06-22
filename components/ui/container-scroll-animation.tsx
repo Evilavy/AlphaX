@@ -6,10 +6,12 @@ export const ContainerScroll = ({
   titleComponent,
   children,
   footerComponent,
+  success,
 }: {
   titleComponent: string | React.ReactNode;
   children: React.ReactNode;
   footerComponent?: React.ReactNode;
+  success?: boolean;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -38,7 +40,7 @@ export const ContainerScroll = ({
 
   return (
     <div
-      className="lg:h-[95rem] flex items-center justify-center relative p-2 md:p-20"
+      className={`lg:h-[${success ? '105' : '95'}rem] flex items-center justify-center relative p-2 md:p-20 transition-all duration-700 ease-in-out`}
       ref={containerRef}
     >
       <div
