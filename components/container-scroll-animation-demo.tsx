@@ -70,7 +70,7 @@ export default function HeroScrollDemo() {
             </h1>
             <p className="px-8 sm:py-0 text-md md:text-xl lg:text-2xl text-gray-600 mb-0 md:mb-12 max-w-3xl mx-auto leading-relaxed mt-6">
               The only extension that reveals high-momentum posts as they
-              emerge. Detect breakout posts in real-time, right from your
+              emerge. Detect breakout tweets in real-time, right from your
               timeline.
             </p>
           </>
