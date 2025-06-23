@@ -69,9 +69,8 @@ export default function HeroScrollDemo() {
               <span className="">Blow Up on X</span>.
             </h1>
             <p className="px-8 sm:py-0 text-md md:text-xl lg:text-2xl text-gray-600 mb-0 md:mb-12 max-w-3xl mx-auto leading-relaxed mt-6">
-              The only extension that reveals high-momentum posts as they
-              emerge. Detect breakout tweets in real-time, right from your
-              timeline.
+              Spot high-momentum tweets early and engage before everyone else
+              Gain visibility by riding the wave directly from your timeline
             </p>
           </>
         }
