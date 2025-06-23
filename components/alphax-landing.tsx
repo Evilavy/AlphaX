@@ -114,7 +114,7 @@ export default function Component() {
         </div>
       </header>
       <div className="hero-scroll-section">
-        <HeroScrollDemo />
+      <HeroScrollDemo />
       </div>
 
       {/* Features Section */}
@@ -476,9 +476,9 @@ export default function Component() {
                       whileFocus={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <Input
-                        type="email"
-                        placeholder="Enter your email"
+              <Input
+                type="email"
+                placeholder="Enter your email"
                         className="flex-1 transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -490,8 +490,8 @@ export default function Component() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      <Button
-                        size="lg"
+              <Button
+                size="lg"
                         className="bg-gradient-to-r from-black to-gray-700 hover:from-gray-800 hover:to-black text-white px-8 py-4 text-lg transition-all duration-300 relative overflow-hidden"
                         disabled={loading}
                       >
@@ -506,7 +506,7 @@ export default function Component() {
                         <span className="relative z-10">
                           {loading ? "Joining..." : "Join the Waitlist"}
                         </span>
-                      </Button>
+              </Button>
                     </motion.div>
                   </form>
 
@@ -524,20 +524,20 @@ export default function Component() {
                   </AnimatePresence>
 
                   {!error && (
-                    <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-600">
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="w-4 h-4 text-green-500" />
-                        <span>Get early access</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="w-4 h-4 text-green-500" />
-                        <span>One-time payment, no subscription</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckIcon className="w-4 h-4 text-green-500" />
-                        <span>Lock in the $5 launch price</span>
-                      </div>
-                    </div>
+            <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <CheckIcon className="w-4 h-4 text-green-500" />
+                <span>Get early access</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="w-4 h-4 text-green-500" />
+                <span>One-time payment, no subscription</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckIcon className="w-4 h-4 text-green-500" />
+                <span>Lock in the $5 launch price</span>
+              </div>
+            </div>
                   )}
                 </motion.div>
               )}

@@ -2,64 +2,10 @@ import { type NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import WaitlistEmail from "@/emails/waitlist-email";
 import ConfirmationEmail from "@/emails/confirmation-email";
-import fs from 'fs';
-import path from 'path';
-
-const resend = new Resend(process.env.EMAIL_SERVER_PASSWORD);
-
-interface WaitlistEntry {
-  email: string;
-  timestamp: string;
-  date: string;
-  time: string;
-}
-
-interface WaitlistData {
-  emails: WaitlistEntry[];
-}
-
-// Function to save email to JSON file
-async function saveEmailToFile(email: string) {
-  try {
-    const filePath = path.join(process.cwd(), 'data', 'waitlist.json');
-    
-    // Ensure directory exists
-    const dir = path.dirname(filePath);
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true });
-    }
-
-    // Read existing data or create new structure
-    let data: WaitlistData = { emails: [] };
-    if (fs.existsSync(filePath)) {
-      const fileContent = fs.readFileSync(filePath, 'utf8');
-      data = JSON.parse(fileContent);
-    }
-
-    // Check if email already exists
-    const emailExists = data.emails.some((entry: WaitlistEntry) => entry.email === email);
-    if (emailExists) {
-      return { alreadyExists: true };
-    }
-
-    // Add new email with timestamp
-    data.emails.push({
-      email: email,
-      timestamp: new Date().toISOString(),
-      date: new Date().toLocaleDateString('fr-FR'),
-      time: new Date().toLocaleTimeString('fr-FR')
-    });
-
-    // Write back to file
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2));
-    return { success: true };
-  } catch (error) {
-    console.error('Error saving email to file:', error);
-    return { error: 'Failed to save email' };
-  }
-}
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
+  const resend = new Resend(process.env.EMAIL_SERVER_PASSWORD);
   try {
     const { email } = await req.json();
 
@@ -70,22 +16,27 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Save email to JSON file first
-    const saveResult = await saveEmailToFile(email);
-    
-    if (saveResult.alreadyExists) {
-      return NextResponse.json(
-        { error: "This email is already on the waitlist" },
-        { status: 400 }
-      );
-    }
+    // --- Supabase Logic ---
+    const { error: supabaseError } = await supabase
+      .from('waitlist')
+      .insert({ email });
 
-    if (saveResult.error) {
+    // Handle potential errors, e.g., duplicate email
+    if (supabaseError) {
+      // 23505 is the code for 'unique_violation'
+      if (supabaseError.code === '23505') {
+        return NextResponse.json(
+          { error: "This email is already on the waitlist" },
+          { status: 400 }
+        );
+      }
+      console.error('Supabase Error:', supabaseError);
       return NextResponse.json(
-        { error: saveResult.error },
+        { error: 'Failed to save email to the database.' },
         { status: 500 }
       );
     }
+    // --- End Supabase Logic ---
 
     const adminEmail = process.env.WAITLIST_TO_EMAIL || "evilavypro@gmail.com";
     const fromEmail = process.env.EMAIL_FROM || "onboarding@resend.dev";
