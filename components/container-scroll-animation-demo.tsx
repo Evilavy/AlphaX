@@ -315,6 +315,11 @@ export default function HeroScrollDemo() {
                   </div>
                 </motion.div>
               </div>
+              <div className="flex flex-row justify-center items-center mt-6">
+                <p className="mr-1">made by</p>
+                <img src="x.webp" className="h-6" alt="" />
+                <p><span className="font-bold">@</span><a href="https://x.com/evi_1k" className="font-bold underline">evi_1k</a> with *heart*</p>
+              </div>
             </div>
           </section>
         }

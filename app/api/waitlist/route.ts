@@ -38,6 +38,41 @@ export async function POST(req: NextRequest) {
     }
     // --- End Supabase Logic ---
 
+    // --- Discord Webhook Notification ---
+    const discordWebhookUrl = process.env.DISCORD_WEBHOOK_URL;
+    if (discordWebhookUrl) {
+      try {
+        await fetch(discordWebhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            embeds: [{
+              title: "🎉 New Waitlist Signup",
+              description: `A new user has joined the waitlist for xviralscope.`,
+              color: 7419530, // A nice green color
+              fields: [
+                {
+                  name: "Email",
+                  value: `**${email}**`,
+                  inline: true,
+                },
+              ],
+              timestamp: new Date().toISOString(),
+              footer: {
+                text: "xviralscope Waitlist",
+              }
+            }],
+          }),
+        });
+      } catch (error) {
+        console.error("Failed to send Discord notification:", error);
+        // We don't want to block the user response if this fails
+      }
+    }
+    // --- End Discord Webhook Notification ---
+
     const adminEmail = process.env.WAITLIST_TO_EMAIL || "evilavypro@gmail.com";
     const fromEmail = process.env.EMAIL_FROM || "onboarding@resend.dev";
 
