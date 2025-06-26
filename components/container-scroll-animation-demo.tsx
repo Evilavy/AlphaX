@@ -208,7 +208,7 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 0.8 }}
                           className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight"
                         >
-                          You're on the List
+                          You're In.
                         </motion.h2>
 
                         <motion.div
@@ -217,14 +217,8 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 1 }}
                           className="mb-6"
                         >
-                          <div className="mt-2 inline-flex items-center bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-2 rounded-full mb-4">
-                            <span className="text-sm font-semibold text-gray-300 tracking-wider">
-                              $5 PRICE LOCKED
-                            </span>
-                          </div>
-                          <p className="text-gray-300 text-lg leading-relaxed">
-                            You'll be notified first when we launch and your $5
-                            early bird price is secured.
+                          <p className="text-gray-300 text-lg leading-relaxed max-w-sm mx-auto">
+                            Welcome to the inner circle. You're now on the priority list to get access and start seeing the future.
                           </p>
                         </motion.div>
 
@@ -234,14 +228,9 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 1.2 }}
                           className="flex items-center justify-center space-x-3 text-gray-400 border-t border-gray-800 pt-6"
                         >
-                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                          <span className="font-medium tracking-wide">
-                            First to know • $5 launch price guaranteed
-                          </span>
-                          <div
-                            className="w-2 h-2 bg-white rounded-full animate-pulse"
-                            style={{ animationDelay: "0.5s" }}
-                          />
+                          <Zap className="w-4 h-4 text-gray-400" />
+                          <span className="font-medium tracking-wide">Get ready to grow.</span>
+                          <Zap className="w-4 h-4 text-gray-400" />
                         </motion.div>
 
                         {/* Premium corners */}
