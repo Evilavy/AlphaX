@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +26,22 @@ export default function HeroScrollDemo() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [waitlistCount, setWaitlistCount] = useState(0);
+
+  useEffect(() => {
+    const fetchWaitlistCount = async () => {
+      try {
+        const res = await fetch("/api/waitlist/view");
+        const data = await res.json();
+        if (res.ok) {
+          setWaitlistCount(data.total);
+        }
+      } catch (error) {
+        console.error("Failed to fetch waitlist count", error);
+      }
+    };
+    fetchWaitlistCount();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +66,7 @@ export default function HeroScrollDemo() {
 
       setSuccess(true);
       setEmail("");
+      setWaitlistCount(prevCount => prevCount + 1);
     } catch (err: any) {
       setError(err.message);
       setTimeout(() => setError(""), 4000);
@@ -68,10 +85,22 @@ export default function HeroScrollDemo() {
               Stop Guessing. See What's About to{" "}
               <span className="">Blow Up on X</span>.
             </h1>
-            <p className="px-8 sm:py-0 text-md md:text-xl lg:text-2xl text-gray-600 mb-0 md:mb-12 max-w-3xl mx-auto leading-relaxed mt-6">
-              Spot high-momentum tweets early and engage before everyone else
-              Gain visibility by riding the wave directly from your timeline
-            </p>
+            {waitlistCount > 0 && (
+              <div className="flex justify-center items-center mb-8">
+                <div className="flex -space-x-4 rtl:space-x-reverse">
+                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp1.jpg" alt=""/>
+                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp2.jpg" alt=""/>
+                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp3.jpg" alt=""/>
+                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp4.png" alt=""/>
+                  {waitlistCount > 4 &&
+                    <a className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-900 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+{waitlistCount - 3}</a>
+                  }
+                </div>
+                <p className="ml-4 text-md md:text-xl text-gray-600">
+                  Join <span className="font-bold text-black">{waitlistCount}</span> others on the waitlist!
+                </p>
+              </div>
+            )}
           </>
         }
         footerComponent={

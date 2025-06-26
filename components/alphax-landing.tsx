@@ -330,10 +330,6 @@ export default function Component() {
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
             Unlock Your Edge{" "}
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-10">
-            The next viral tweet is already gaining speed. Will you be the one
-            to ride it or the one who missed it?
-          </p>
           <div className="max-w-md mx-auto">
             <AnimatePresence mode="wait">
               {success ? (
