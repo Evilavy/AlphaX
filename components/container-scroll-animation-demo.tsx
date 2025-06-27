@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,22 +26,6 @@ export default function HeroScrollDemo() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
-  const [waitlistCount, setWaitlistCount] = useState(0);
-
-  useEffect(() => {
-    const fetchWaitlistCount = async () => {
-      try {
-        const res = await fetch("/api/waitlist/view");
-        const data = await res.json();
-        if (res.ok) {
-          setWaitlistCount(data.total);
-        }
-      } catch (error) {
-        console.error("Failed to fetch waitlist count", error);
-      }
-    };
-    fetchWaitlistCount();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -66,7 +50,6 @@ export default function HeroScrollDemo() {
 
       setSuccess(true);
       setEmail("");
-      setWaitlistCount(prevCount => prevCount + 1);
     } catch (err: any) {
       setError(err.message);
       setTimeout(() => setError(""), 4000);
@@ -85,22 +68,10 @@ export default function HeroScrollDemo() {
               Stop Guessing. See What's About to{" "}
               <span className="">Blow Up on X</span>.
             </h1>
-            {waitlistCount > 0 && (
-              <div className="flex justify-center items-center mb-8">
-                <div className="flex -space-x-4 rtl:space-x-reverse">
-                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp1.jpg" alt=""/>
-                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp2.jpg" alt=""/>
-                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp3.jpg" alt=""/>
-                  <img className="w-10 h-10 border-2 border-white rounded-full dark:border-gray-800" src="pp4.png" alt=""/>
-                  {waitlistCount > 4 &&
-                    <a className="flex items-center justify-center w-10 h-10 text-xs font-medium text-white bg-gray-900 border-2 border-white rounded-full hover:bg-gray-600 dark:border-gray-800" href="#">+{waitlistCount - 3}</a>
-                  }
-                </div>
-                <p className="ml-4 text-md md:text-xl text-gray-600">
-                  Join <span className="font-bold text-black">{waitlistCount}</span> others on the waitlist!
-                </p>
-              </div>
-            )}
+            <p className="px-8 sm:py-0 text-md md:text-xl lg:text-2xl text-gray-600 mb-0 md:mb-12 max-w-3xl mx-auto leading-relaxed mt-6">
+              Spot high-momentum tweets early and engage before everyone else
+              Gain visibility by riding the wave directly from your timeline
+            </p>
           </>
         }
         footerComponent={
@@ -208,7 +179,7 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 0.8 }}
                           className="text-3xl md:text-4xl font-bold text-white mb-3 tracking-tight"
                         >
-                          You're In.
+                          You're on the List
                         </motion.h2>
 
                         <motion.div
@@ -217,8 +188,14 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 1 }}
                           className="mb-6"
                         >
-                          <p className="text-gray-300 text-lg leading-relaxed max-w-sm mx-auto">
-                            Welcome to the inner circle. You're now on the priority list to get access and start seeing the future.
+                          <div className="mt-2 inline-flex items-center bg-gradient-to-r from-gray-800 to-gray-700 px-4 py-2 rounded-full mb-4">
+                            <span className="text-sm font-semibold text-gray-300 tracking-wider">
+                              $5 PRICE LOCKED
+                            </span>
+                          </div>
+                          <p className="text-gray-300 text-lg leading-relaxed">
+                            You'll be notified first when we launch and your $5
+                            early bird price is secured.
                           </p>
                         </motion.div>
 
@@ -228,9 +205,14 @@ export default function HeroScrollDemo() {
                           transition={{ delay: 1.2 }}
                           className="flex items-center justify-center space-x-3 text-gray-400 border-t border-gray-800 pt-6"
                         >
-                          <Zap className="w-4 h-4 text-gray-400" />
-                          <span className="font-medium tracking-wide">Get ready to grow.</span>
-                          <Zap className="w-4 h-4 text-gray-400" />
+                          <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
+                          <span className="font-medium tracking-wide">
+                            First to know • $5 launch price guaranteed
+                          </span>
+                          <div
+                            className="w-2 h-2 bg-white rounded-full animate-pulse"
+                            style={{ animationDelay: "0.5s" }}
+                          />
                         </motion.div>
 
                         {/* Premium corners */}
