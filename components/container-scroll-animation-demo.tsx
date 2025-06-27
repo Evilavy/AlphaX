@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ContainerScroll } from "@/components/ui/container-scroll-animation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -26,6 +26,23 @@ export default function HeroScrollDemo() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [waitlistCount, setWaitlistCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const fetchWaitlistCount = async () => {
+      try {
+        const res = await fetch("/api/waitlist/view");
+        const data = await res.json();
+        if (res.ok && typeof data.total === "number") {
+          setWaitlistCount(data.total);
+        }
+      } catch (error) {
+        console.error("Failed to fetch waitlist count", error);
+      }
+    };
+
+    fetchWaitlistCount();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -50,6 +67,7 @@ export default function HeroScrollDemo() {
 
       setSuccess(true);
       setEmail("");
+      setWaitlistCount((prev) => (typeof prev === "number" ? prev + 1 : prev));
     } catch (err: any) {
       setError(err.message);
       setTimeout(() => setError(""), 4000);
@@ -307,7 +325,11 @@ export default function HeroScrollDemo() {
                 >
                   <div className="flex items-center space-x-2">
                     <Users className="w-4 h-4" />
-                    <span>Identify viral tweets before anyone else</span>
+                    <span>
+                      {waitlistCount !== null
+                        ? `Join the first ${waitlistCount.toLocaleString()} hunters on the way to 100`
+                        : "Loading..."}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-2">
                     <Shield className="w-4 h-4" />
