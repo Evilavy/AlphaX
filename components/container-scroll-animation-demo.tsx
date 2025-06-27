@@ -342,6 +342,71 @@ export default function HeroScrollDemo() {
                 <img src="x.webp" className="h-6" alt="" />
                 <p><span className="font-bold">@</span><a href="https://x.com/evi_1k" className="font-bold underline">evi_1k</a> with *heart*</p>
               </div>
+
+              {/* Metrics Section */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="mb-12 mt-12"
+              >
+                <motion.h3 
+                  className="text-lg md:text-xl font-semibold text-gray-500 mb-8 text-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  Early riders report massive growth:
+                </motion.h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                  {[
+                    { icon: Eye, color: "blue", value: 240, label: "Impressions Boost", desc: "Riding high-velocity tweets" },
+                    { icon: TrendingUp, color: "green", value: 110, label: "Engagement Rate", desc: "Early replies = more reach" },
+                    { icon: Users, color: "purple", value: 90, label: "Profile Visits", desc: "Reply-Driven Profile Visits" }
+                  ].map((metric, i) => (
+                    <motion.div
+                      key={metric.label}
+                      initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      transition={{ delay: 1 + i * 0.2, duration: 0.6 }}
+                      className="bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700 rounded-xl p-6 text-center relative overflow-hidden shadow-2xl"
+                    >
+                      <motion.div
+                        className="absolute inset-0 rounded-xl opacity-30"
+                        animate={{ boxShadow: [`0 0 20px rgba(255,255,255,0.1)`, `0 0 40px rgba(255,255,255,0.2)`, `0 0 20px rgba(255,255,255,0.1)`] }}
+                        transition={{ duration: 2, repeat: Infinity, ease: "easeInOut", delay: i * 0.5 }}
+                      />
+                      <motion.div
+                        className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-white via-gray-400 to-white"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ delay: 1.2 + i * 0.2, duration: 1 }}
+                      />
+                      <div className="absolute inset-0 opacity-10">
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
+                      </div>
+                      <metric.icon className="w-8 h-8 text-white mx-auto mb-3 relative z-10" />
+                      <div className="text-white relative z-10">
+                        <span className="font-bold text-2xl md:text-3xl">+{metric.value}%</span>
+                      </div>
+                      <p className="text-gray-200 font-medium mt-2 relative z-10">{metric.label}</p>
+                      <p className="text-gray-400 text-sm mt-1 relative z-10">{metric.desc}</p>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 2 }}
+                  className="text-center mt-6"
+                >
+                  <p className="text-sm text-gray-500 italic">
+                    *Based on 30-day analysis of beta users engaging with high-velocity tweets
+                  </p>
+                </motion.div>
+              </motion.div>
             </div>
           </section>
         }
