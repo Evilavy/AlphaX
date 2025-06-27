@@ -82,20 +82,6 @@ export default function HeroScrollDemo() {
         success={success}
         titleComponent={
           <>
-            <div>
-              <a
-                href="https://fazier.com/launches/www.xpectviral.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex justify-center items-center"
-              >
-                <img
-                  src="https://fazier.com/api/v1//public/badges/launch_badges.svg?badge_type=launched&theme=light"
-                  width={120}
-                  alt="Fazier badge"
-                />
-              </a>
-            </div>
             <h1 className="px-8 sm:py-0 text-3xl md:text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-black via-gray-700 to-gray-500 bg-clip-text text-transparent">
               Stop Guessing. See What's About to{" "}
               <span className="">Blow Up on X</span>.
