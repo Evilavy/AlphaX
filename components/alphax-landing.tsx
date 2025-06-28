@@ -280,8 +280,8 @@ export default function Component() {
                 This Could Be Your Next Opportunity
               </h3>
               <p className="text-gray-600 text-lg mb-6">
-                Stop missing viral moments. Start engaging with tweets before
-                they blow up.
+                Stop missing key moments. Start engaging with tweets before they
+                gain traction.
               </p>
               <Button
                 variant="outline"
