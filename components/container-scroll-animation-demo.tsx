@@ -93,7 +93,7 @@ export default function HeroScrollDemo() {
           </>
         }
         footerComponent={
-          <section className="py-6 lg:py-32 relative overflow-hidde">
+          <section className="pt-6 lg:py-32 relative overflow-hidde">
             <div className="container mx-auto px-4 text-center">
               <div className="max-w-4xl mx-auto">
                 <AnimatePresence mode="wait">

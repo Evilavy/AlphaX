@@ -54,7 +54,6 @@ export default function Component() {
 
       setSuccess(true);
       setEmail("");
-      
     } catch (err: any) {
       setError(err.message);
       setTimeout(() => setError(""), 4000);
@@ -64,11 +63,11 @@ export default function Component() {
   };
 
   const scrollToSignup = () => {
-    const signupForm = document.getElementById('signup-form');
+    const signupForm = document.getElementById("signup-form");
     if (signupForm) {
-      signupForm.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'center'
+      signupForm.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
       });
     }
   };
@@ -120,8 +119,125 @@ export default function Component() {
         </div>
       </header>
       <div className="hero-scroll-section">
-      <HeroScrollDemo />
+        <HeroScrollDemo />
       </div>
+
+      {/* Before/After Demo Section */}
+      <section className="bg-white mb-20">
+        <div className="container mx-auto px-4">
+          <div className="text-center md:mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+              See It In Action
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Here's what happened when XpectViral spotted a Rising Star ⭐️
+              tweet with unusual velocity
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-12 xl:gap-16">
+              {/* Before Image */}
+              <div className="text-center">
+                <div className="relative h-44 flex items-center justify-center">
+                  <div className="relative">
+                    <img
+                      src="/tweet-spotted.png"
+                      alt="Tweet spotted as Rising Star with early engagement"
+                      className="max-w-full max-h-full rounded-lg shadow-lg border border-gray-200 object-contain"
+                    />
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-gray-500 to-black text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                      ⭐️ SPOTTED
+                    </div>
+                  </div>
+                </div>
+                <div className="md:mt-6">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                    Tweet Detected
+                  </h3>
+                  <p className="text-gray-600 text-lg">
+                    XpectViral flags this tweet as a Rising Star due to unusual
+                    early velocity
+                  </p>
+                </div>
+              </div>
+
+              {/* Mobile Timeline - Only visible on small screens */}
+              <div className="flex justify-center lg:hidden">
+                <div className="flex flex-col items-center">
+                  <div className="w-px h-8 bg-gray-300"></div>
+                  <div className="w-10 h-10 bg-gradient-to-r from-black to-gray-600 rounded-full flex items-center justify-center my-2">
+                    <Clock className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-sm font-semibold text-gray-600 text-center">
+                    60 MINUTES
+                    <br />
+                    LATER
+                  </span>
+                  <div className="w-px h-8 bg-gray-300 md:mt-2"></div>
+                </div>
+              </div>
+
+              {/* After Image */}
+              <div className="text-center">
+                <div className="relative h-44 flex items-center justify-center">
+                  <div className="relative">
+                    <img
+                      src="/tweet-5minutes-after.png"
+                      alt="Same tweet 60 minutes later with massive engagement growth"
+                      className="max-w-full max-h-full rounded-lg shadow-lg border border-gray-200 object-contain"
+                    />
+                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-gray-500 to-black text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                      🔥 BOOM
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-6">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
+                    60 Minutes Later
+                  </h3>
+                  <p className="text-gray-600 text-lg">
+                    This tweet had a sudden spike in engagement, replying early
+                    could have earned you thousands of impressions
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Desktop Timeline - Hidden on mobile */}
+            <div className="hidden lg:flex justify-center md:mt-12">
+              <div className="flex items-center bg-white border border-gray-200 rounded-full px-6 py-3 shadow-sm">
+                <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-full flex items-center justify-center mr-3">
+                  <Clock className="w-4 h-4 text-white" />
+                </div>
+                <span className="text-sm font-semibold text-gray-700">
+                  Just 60 minutes between these screenshots
+                </span>
+              </div>
+            </div>
+
+            {/* Call to Action */}
+            <div className="text-center mt-16">
+              <div className="bg-gradient-to-r from-black/5 to-gray-500/5 rounded-2xl p-8 max-w-2xl mx-auto">
+                <h3 className="text-2xl font-bold mb-4">
+                  This Could Be Your Next Opportunity
+                </h3>
+                <p className="text-gray-600 text-lg mb-6">
+                  Stop missing viral moments. Start engaging with tweets before
+                  they blow up.
+                </p>
+                <Button
+                  variant="outline"
+                  className="cursor-pointer bg-transparent border-black text-black hover:bg-black hover:text-white"
+                  onClick={scrollToSignup}
+                >
+                  Get Early Access
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
@@ -350,7 +466,11 @@ export default function Component() {
                   What exactly is XpectViral?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  XpectViral is a lightweight Chrome extension that automatically detects tweets with unusual velocity in your X feed. Instead of shouting into the void, it helps you reply smartly to the right tweets at the right time to maximize your visibility and gain real followers.
+                  XpectViral is a lightweight Chrome extension that
+                  automatically detects tweets with unusual velocity in your X
+                  feed. Instead of shouting into the void, it helps you reply
+                  smartly to the right tweets at the right time to maximize your
+                  visibility and gain real followers.
                 </p>
               </CardContent>
             </Card>
@@ -365,7 +485,10 @@ export default function Component() {
                   How does the tool integrate with X's interface?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  The extension integrates directly into your X.com feed without modifying the interface. It simply adds discrete badges (🔥 for hot posts still growing, ⭐️ for emerging tweets) that let you instantly spot engagement opportunities.
+                  The extension integrates directly into your X.com feed without
+                  modifying the interface. It simply adds discrete badges (🔥
+                  for hot posts still growing, ⭐️ for emerging tweets) that let
+                  you instantly spot engagement opportunities.
                 </p>
               </CardContent>
             </Card>
@@ -380,7 +503,10 @@ export default function Component() {
                   When will I receive alerts or badges?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  Badges appear instantly as soon as you load your feed. The algorithm detects unusual velocity in real-time - so you can reply to emerging tweets before they explode, or quote-tweet hot posts while they're still generating massive traffic.
+                  Badges appear instantly as soon as you load your feed. The
+                  algorithm detects unusual velocity in real-time - so you can
+                  reply to emerging tweets before they explode, or quote-tweet
+                  hot posts while they're still generating massive traffic.
                 </p>
               </CardContent>
             </Card>
@@ -395,7 +521,11 @@ export default function Component() {
                   What do I get by joining the waitlist now?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  By joining the waitlist now, you get priority access at launch, your $5 price is locked for life, and you'll receive exclusive updates. Most importantly: you'll be among the first to use this strategy to grow your X audience smartly instead of shouting into the void.
+                  By joining the waitlist now, you get priority access at
+                  launch, your $5 price is locked for life, and you'll receive
+                  exclusive updates. Most importantly: you'll be among the first
+                  to use this strategy to grow your X audience smartly instead
+                  of shouting into the void.
                 </p>
               </CardContent>
             </Card>
@@ -410,7 +540,11 @@ export default function Component() {
                   How do you detect "Rising Stars"?
                 </h3>
                 <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  The algorithm detects tweets with "unusual velocity" - meaning those gaining engagement faster than normal for their context. The ⭐️ "Rising Stars" are fresh tweets with early signs of blowing up, perfect for engaging replies that will be seen by thousands of people.
+                  The algorithm detects tweets with "unusual velocity" - meaning
+                  those gaining engagement faster than normal for their context.
+                  The ⭐️ "Rising Stars" are fresh tweets with early signs of
+                  blowing up, perfect for engaging replies that will be seen by
+                  thousands of people.
                 </p>
               </CardContent>
             </Card>
@@ -456,31 +590,31 @@ export default function Component() {
                           transform: `rotate(${i * 45}deg)`,
                         }}
                         initial={{ scaleY: 0, opacity: 0 }}
-                        animate={{ 
+                        animate={{
                           scaleY: [0, 1, 0],
                           opacity: [0, 0.6, 0],
                         }}
-                        transition={{ 
+                        transition={{
                           duration: 2,
                           delay: i * 0.1,
-                          ease: "easeOut"
+                          ease: "easeOut",
                         }}
                       />
                     ))}
                   </div>
 
                   {/* Elite badge */}
-                  <motion.div 
+                  <motion.div
                     className="relative bg-gradient-to-b from-gray-900 via-black to-gray-900 border border-gray-800 rounded-2xl p-8 shadow-2xl backdrop-blur-sm overflow-hidden"
-                    initial={{ 
-                      boxShadow: "0 0 0 0 rgba(0, 0, 0, 0.3)" 
+                    initial={{
+                      boxShadow: "0 0 0 0 rgba(0, 0, 0, 0.3)",
                     }}
-                    animate={{ 
+                    animate={{
                       boxShadow: [
                         "0 0 0 0 rgba(0, 0, 0, 0.3)",
                         "0 0 60px 0 rgba(0, 0, 0, 0.4)",
-                        "0 0 0 0 rgba(0, 0, 0, 0.3)"
-                      ]
+                        "0 0 0 0 rgba(0, 0, 0, 0.3)",
+                      ],
                     }}
                     transition={{ duration: 2, repeat: 1 }}
                   >
@@ -493,11 +627,11 @@ export default function Component() {
                     <motion.div
                       initial={{ scale: 0, rotate: -180 }}
                       animate={{ scale: 1, rotate: 0 }}
-                      transition={{ 
-                        delay: 0.3, 
-                        type: "spring", 
+                      transition={{
+                        delay: 0.3,
+                        type: "spring",
                         stiffness: 200,
-                        damping: 15
+                        damping: 15,
                       }}
                       className="w-20 h-20 bg-gradient-to-br from-white via-gray-200 to-gray-400 rounded-full flex items-center justify-center mx-auto mb-6 relative shadow-2xl"
                     >
@@ -513,11 +647,15 @@ export default function Component() {
                       <motion.div
                         className="absolute inset-0 border-2 border-gray-300 rounded-full"
                         animate={{ rotate: 360 }}
-                        transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                        transition={{
+                          duration: 3,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
                       />
                     </motion.div>
-                    
-                    <motion.h2 
+
+                    <motion.h2
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.8 }}
@@ -525,7 +663,7 @@ export default function Component() {
                     >
                       You're on the List
                     </motion.h2>
-                    
+
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -538,19 +676,25 @@ export default function Component() {
                         </span>
                       </div>
                       <p className="text-gray-300 text-lg leading-relaxed">
-                        You'll be notified first when we launch and your $5 early bird price is secured.
+                        You'll be notified first when we launch and your $5
+                        early bird price is secured.
                       </p>
                     </motion.div>
-                    
-                    <motion.div 
+
+                    <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
                       animate={{ opacity: 1, scale: 1 }}
                       transition={{ delay: 1.2 }}
                       className="flex items-center justify-center space-x-3 text-gray-400 border-t border-gray-800 pt-6"
                     >
                       <div className="w-2 h-2 bg-white rounded-full animate-pulse" />
-                      <span className="font-medium tracking-wide">First to know • $5 launch price guaranteed</span>
-                      <div className="w-2 h-2 bg-white rounded-full animate-pulse" style={{ animationDelay: "0.5s" }} />
+                      <span className="font-medium tracking-wide">
+                        First to know • $5 launch price guaranteed
+                      </span>
+                      <div
+                        className="w-2 h-2 bg-white rounded-full animate-pulse"
+                        style={{ animationDelay: "0.5s" }}
+                      />
                     </motion.div>
 
                     {/* Premium corners */}
@@ -567,15 +711,18 @@ export default function Component() {
                   exit={{ scale: 0.95, opacity: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-4">
+                  <form
+                    onSubmit={handleSubmit}
+                    className="flex flex-col sm:flex-row items-center gap-4"
+                  >
                     <motion.div
                       className="flex-1"
                       whileFocus={{ scale: 1.02 }}
                       transition={{ duration: 0.2 }}
                     >
-              <Input
-                type="email"
-                placeholder="Enter your email"
+                      <Input
+                        type="email"
+                        placeholder="Enter your email"
                         className="flex-1 transition-all duration-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -587,8 +734,8 @@ export default function Component() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-              <Button
-                size="lg"
+                      <Button
+                        size="lg"
                         className="bg-gradient-to-r from-black to-gray-700 hover:from-gray-800 hover:to-black text-white px-8 py-4 text-lg transition-all duration-300 relative overflow-hidden"
                         disabled={loading}
                       >
@@ -603,7 +750,7 @@ export default function Component() {
                         <span className="relative z-10">
                           {loading ? "Joining..." : "Join the Waitlist"}
                         </span>
-              </Button>
+                      </Button>
                     </motion.div>
                   </form>
 
@@ -621,20 +768,20 @@ export default function Component() {
                   </AnimatePresence>
 
                   {!error && (
-            <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <CheckIcon className="w-4 h-4 text-green-500" />
-                <span>Get early access</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckIcon className="w-4 h-4 text-green-500" />
-                <span>One-time payment, no subscription</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckIcon className="w-4 h-4 text-green-500" />
-                <span>Lock in the $5 launch price</span>
-              </div>
-            </div>
+                    <div className="mt-6 flex flex-col sm:flex-row justify-center items-center gap-x-6 gap-y-2 text-sm text-gray-600">
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="w-4 h-4 text-green-500" />
+                        <span>Get early access</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="w-4 h-4 text-green-500" />
+                        <span>One-time payment, no subscription</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CheckIcon className="w-4 h-4 text-green-500" />
+                        <span>Lock in the $5 launch price</span>
+                      </div>
+                    </div>
                   )}
                 </motion.div>
               )}
