@@ -18,18 +18,24 @@ import {
   Eye,
   CheckIcon,
   Check,
+  ChevronDown,
+  Heart,
+  MessageCircle,
+  Repeat2,
 } from "lucide-react";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import Link from "next/link";
 import HeroScrollDemo from "@/components/container-scroll-animation-demo";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Image from "next/image";
 
 export default function Component() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -60,6 +66,10 @@ export default function Component() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
   };
 
   const scrollToSignup = () => {
@@ -122,123 +132,168 @@ export default function Component() {
         <HeroScrollDemo />
       </div>
 
-      {/* Before/After Demo Section */}
-      <section className="bg-white mb-20">
-        <div className="container mx-auto px-4">
-          <div className="text-center md:mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
-              See It In Action
+      {/* Before/After Section*/}
+      <section className="py-20 bg-black">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <Badge className="mb-4 bg-white text-black">
+              <TrendingUp className="w-4 h-4 mr-2" />
+              Real Results
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              See XpectViral in Action
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Here's what happened when XpectViral spotted a Rising Star ⭐️
-              tweet with unusual velocity
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Watch how we spotted this rising tweet early, giving you the
+              perfect window to engage
             </p>
           </div>
 
-          <div className="max-w-6xl mx-auto">
-            <div className="grid lg:grid-cols-2 gap-12 xl:gap-16">
-              {/* Before Image */}
-              <div className="text-center">
-                <div className="relative h-44 flex items-center justify-center">
-                  <div className="relative">
-                    <img
-                      src="/tweet-spotted.png"
-                      alt="Tweet spotted as Rising Star with early engagement"
-                      className="max-w-full max-h-full rounded-lg shadow-lg border border-gray-200 object-contain"
-                    />
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-gray-500 to-black text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                      ⭐️ SPOTTED
-                    </div>
-                  </div>
-                </div>
-                <div className="md:mt-6">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
-                    Tweet Detected
-                  </h3>
-                  <p className="text-gray-600 text-lg">
-                    XpectViral flags this tweet as a Rising Star due to unusual
-                    early velocity
-                  </p>
-                </div>
-              </div>
-
-              {/* Mobile Timeline - Only visible on small screens */}
-              <div className="flex justify-center lg:hidden">
-                <div className="flex flex-col items-center">
-                  <div className="w-px h-8 bg-gray-300"></div>
-                  <div className="w-10 h-10 bg-gradient-to-r from-black to-gray-600 rounded-full flex items-center justify-center my-2">
-                    <Clock className="w-5 h-5 text-white" />
-                  </div>
-                  <span className="text-sm font-semibold text-gray-600 text-center">
-                    60 MINUTES
-                    <br />
-                    LATER
-                  </span>
-                  <div className="w-px h-8 bg-gray-300 md:mt-2"></div>
-                </div>
-              </div>
-
-              {/* After Image */}
-              <div className="text-center">
-                <div className="relative h-44 flex items-center justify-center">
-                  <div className="relative">
-                    <img
-                      src="/tweet-5minutes-after.png"
-                      alt="Same tweet 60 minutes later with massive engagement growth"
-                      className="max-w-full max-h-full rounded-lg shadow-lg border border-gray-200 object-contain"
-                    />
-                    <div className="absolute -top-3 -right-3 bg-gradient-to-r from-gray-500 to-black text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg">
-                      🔥 BOOM
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl sm:text-2xl font-bold mb-2">
-                    60 Minutes Later
-                  </h3>
-                  <p className="text-gray-600 text-lg">
-                    This tweet had a sudden spike in engagement, replying early
-                    could have earned you thousands of impressions
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Desktop Timeline - Hidden on mobile */}
-            <div className="hidden lg:flex justify-center md:mt-12">
-              <div className="flex items-center bg-white border border-gray-200 rounded-full px-6 py-3 shadow-sm">
-                <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-full flex items-center justify-center mr-3">
-                  <Clock className="w-4 h-4 text-white" />
-                </div>
-                <span className="text-sm font-semibold text-gray-700">
-                  Just 60 minutes between these screenshots
-                </span>
-              </div>
-            </div>
-
-            {/* Call to Action */}
-            <div className="text-center mt-16">
-              <div className="bg-gradient-to-r from-black/5 to-gray-500/5 rounded-2xl p-8 max-w-2xl mx-auto">
-                <h3 className="text-2xl font-bold mb-4">
-                  This Could Be Your Next Opportunity
-                </h3>
-                <p className="text-gray-600 text-lg mb-6">
-                  Stop missing viral moments. Start engaging with tweets before
-                  they blow up.
-                </p>
-                <Button
-                  variant="outline"
-                  className="cursor-pointer bg-transparent border-black text-black hover:bg-black hover:text-white"
-                  onClick={scrollToSignup}
+          <div className="h-[300px] sm:h-[400px] flex flex-col justify-between max-w-[1100px] mt-22">
+            <motion.div
+              className="text-white"
+              initial={{ x: -150, opacity: 0, rotateY: -15 }}
+              whileInView={{ x: 0, opacity: 1, rotateY: 0 }}
+              transition={{
+                duration: 0.6,
+                ease: [0.25, 0.46, 0.45, 0.94],
+                type: "spring",
+                stiffness: 150,
+              }}
+              viewport={{ once: true, amount: 0.2 }}
+              whileHover={{ scale: 1.02 }}
+            >
+              <motion.h3
+                className="ml-[5px] font-bold"
+                initial={{ x: -80, opacity: 0, y: 20 }}
+                whileInView={{ x: 0, opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.1,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "spring",
+                }}
+                viewport={{ once: true }}
+                whileHover={{ x: 5, transition: { duration: 0.2 } }}
+              >
+                1. XpectViral Catches It Early
+              </motion.h3>
+              <motion.h4
+                className="text-gray-400 ml-[5px]"
+                initial={{ x: -60, opacity: 0, y: 15 }}
+                whileInView={{ x: 0, opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.2,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                viewport={{ once: true }}
+              >
+                Low engagement but showing early signs of momentum
+              </motion.h4>
+              <motion.div
+                className="relative w-fit"
+                initial={{ x: -120, opacity: 0, scale: 0.8, rotateX: -10 }}
+                whileInView={{ x: 0, opacity: 1, scale: 1, rotateX: 0 }}
+                transition={{
+                  duration: 0.5,
+                  delay: 0.3,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                  type: "spring",
+                  stiffness: 120,
+                }}
+                viewport={{ once: true }}
+                whileHover={{
+                  scale: 1.05,
+                  rotateY: 2,
+                  transition: { duration: 0.3 },
+                }}
+              >
+                <motion.img
+                  className="max-w-[600px] rounded-lg shadow-2xl  w-[100%] sm:w-auto"
+                  src="tweet-spotted.png"
+                  alt=""
+                  initial={{ filter: "blur(4px)" }}
+                  whileInView={{ filter: "blur(0px)" }}
+                  transition={{ duration: 0.4, delay: 0.4 }}
+                />
+                <motion.img
+                  src="arrow.svg"
+                  alt=""
+                  className="absolute left-[55%] transform -translate-x-1/2 -bottom-[160px] hidden lg:block"
+                  initial={{
+                    opacity: 0,
+                    scale: 0.3,
+                    rotate: -45,
+                    y: -20,
+                  }}
+                  whileInView={{
+                    opacity: 1,
+                    scale: 1,
+                    rotate: 0,
+                    y: 0,
+                  }}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.5,
+                    ease: [0.34, 1.56, 0.64, 1],
+                    type: "spring",
+                    stiffness: 150,
+                  }}
+                  viewport={{ once: true }}
+                />
+              </motion.div>
+            </motion.div>
+            <motion.div
+              className="flex justify-end text-white"
+              initial={{ x: 100, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2, ease: "easeOut" }}
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <div>
+                <motion.h3
+                  initial={{ x: 50, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  transition={{ duration: 0.4, delay: 0.3, ease: "easeOut" }}
+                  viewport={{ once: true }}
                 >
-                  Get Early Access
-                </Button>
+                  2. This Could've Been Your Window
+                </motion.h3>
+                <motion.img
+                  className="max-w-[600px] w-[100%] sm:w-auto"
+                  src="after-spotted.png"
+                  alt=""
+                  initial={{ x: 80, opacity: 0, scale: 0.9 }}
+                  whileInView={{ x: 0, opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+                  viewport={{ once: true }}
+                />
               </div>
+            </motion.div>
+          </div>
+
+          {/* Bottom CTA */}
+          <div className="text-center mt-28">
+            <div className="bg-gradient-to-r from-white to-gray-300 rounded-2xl p-8 max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">
+                This Could Be Your Next Opportunity
+              </h3>
+              <p className="text-gray-600 text-lg mb-6">
+                Stop missing viral moments. Start engaging with tweets before
+                they blow up.
+              </p>
+              <Button
+                variant="outline"
+                className="cursor-pointer bg-transparent border-black text-black hover:bg-black hover:text-white"
+                onClick={scrollToSignup}
+              >
+                Join the Waitlist
+              </Button>
             </div>
           </div>
         </div>
       </section>
-
       {/* Features Section */}
       <section id="features" className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
@@ -455,99 +510,83 @@ export default function Component() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto space-y-8">
-            {/* FAQ Item 1 */}
-            <Card className="bg-gray-50 border-gray-200 p-6">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
-                    <Zap className="w-4 h-4 text-white" />
-                  </div>
-                  What exactly is XpectViral?
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  XpectViral is a lightweight Chrome extension that
-                  automatically detects tweets with unusual velocity in your X
-                  feed. Instead of shouting into the void, it helps you reply
-                  smartly to the right tweets at the right time to maximize your
-                  visibility and gain real followers.
-                </p>
-              </CardContent>
-            </Card>
+          <div className="max-w-4xl mx-auto space-y-4">
+            {[
+              {
+                icon: Zap,
+                question: "What exactly is XpectViral?",
+                answer:
+                  "XpectViral is a lightweight Chrome extension that automatically detects tweets with unusual velocity in your X feed. Instead of shouting into the void, it helps you reply smartly to the right tweets at the right time to maximize your visibility and gain real followers.",
+              },
+              {
+                icon: Eye,
+                question: "How does the tool integrate with X's interface?",
+                answer:
+                  "The extension integrates directly into your X.com feed without modifying the interface. It simply adds discrete badges (🔥 for hot posts still growing, ⭐️ for emerging tweets) that let you instantly spot engagement opportunities.",
+              },
+              {
+                icon: Clock,
+                question: "When will I receive alerts or badges?",
+                answer:
+                  "Badges appear instantly as soon as you load your feed. The algorithm detects unusual velocity in real-time - so you can reply to emerging tweets before they explode, or quote-tweet hot posts while they're still generating massive traffic.",
+              },
+              {
+                icon: Users,
+                question: "What do I get by joining the waitlist now?",
+                answer:
+                  "By joining the waitlist now, you get priority access at launch, your $5 price is locked for life, and you'll receive exclusive updates. Most importantly: you'll be among the first to use this strategy to grow your X audience smartly instead of shouting into the void.",
+              },
+              {
+                icon: Star,
+                question: 'How do you detect "Rising Stars"?',
+                answer:
+                  'The algorithm detects tweets with "unusual velocity" - meaning those gaining engagement faster than normal for their context. The ⭐️ "Rising Stars" are fresh tweets with early signs of blowing up, perfect for engaging replies that will be seen by thousands of people.',
+              },
+            ].map((faq, index) => {
+              const IconComponent = faq.icon;
+              return (
+                <Card
+                  key={index}
+                  className="bg-white border-gray-200 overflow-hidden cursor-pointer hover:bg-gray-50 transition-colors duration-200"
+                  onClick={() => toggleFaq(index)}
+                >
+                  <CardContent className="p-0">
+                    <div className="w-full p-6 flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                          <IconComponent className="w-4 h-4 text-white" />
+                        </div>
+                        <h3 className="text-xl font-bold">{faq.question}</h3>
+                      </div>
+                      <motion.div
+                        animate={{ rotate: openFaq === index ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <ChevronDown className="w-5 h-5 text-gray-400" />
+                      </motion.div>
+                    </div>
 
-            {/* FAQ Item 2 */}
-            <Card className="bg-gray-50 border-gray-200 p-6">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
-                    <Eye className="w-4 h-4 text-white" />
-                  </div>
-                  How does the tool integrate with X's interface?
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  The extension integrates directly into your X.com feed without
-                  modifying the interface. It simply adds discrete badges (🔥
-                  for hot posts still growing, ⭐️ for emerging tweets) that let
-                  you instantly spot engagement opportunities.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* FAQ Item 3 */}
-            <Card className="bg-gray-50 border-gray-200 p-6">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
-                    <Clock className="w-4 h-4 text-white" />
-                  </div>
-                  When will I receive alerts or badges?
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  Badges appear instantly as soon as you load your feed. The
-                  algorithm detects unusual velocity in real-time - so you can
-                  reply to emerging tweets before they explode, or quote-tweet
-                  hot posts while they're still generating massive traffic.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* FAQ Item 4 */}
-            <Card className="bg-gray-50 border-gray-200 p-6">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
-                    <Users className="w-4 h-4 text-white" />
-                  </div>
-                  What do I get by joining the waitlist now?
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  By joining the waitlist now, you get priority access at
-                  launch, your $5 price is locked for life, and you'll receive
-                  exclusive updates. Most importantly: you'll be among the first
-                  to use this strategy to grow your X audience smartly instead
-                  of shouting into the void.
-                </p>
-              </CardContent>
-            </Card>
-
-            {/* FAQ Item 5 */}
-            <Card className="bg-gray-50 border-gray-200 p-6">
-              <CardContent className="p-0">
-                <h3 className="text-xl font-bold mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
-                    <Star className="w-4 h-4 text-white" />
-                  </div>
-                  How do you detect "Rising Stars"?
-                </h3>
-                <p className="text-gray-600 text-lg leading-relaxed ml-11">
-                  The algorithm detects tweets with "unusual velocity" - meaning
-                  those gaining engagement faster than normal for their context.
-                  The ⭐️ "Rising Stars" are fresh tweets with early signs of
-                  blowing up, perfect for engaging replies that will be seen by
-                  thousands of people.
-                </p>
-              </CardContent>
-            </Card>
+                    <AnimatePresence>
+                      {openFaq === index && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 ml-11">
+                            <p className="text-gray-600 text-lg leading-relaxed">
+                              {faq.answer}
+                            </p>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </CardContent>
+                </Card>
+              );
+            })}
           </div>
         </div>
       </section>
