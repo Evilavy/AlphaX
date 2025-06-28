@@ -98,6 +98,12 @@ export default function Component() {
               How It Works
             </Link>
             <Link
+              href="#faq"
+              className="text-gray-600 hover:text-black transition-colors"
+            >
+              FAQ
+            </Link>
+            <Link
               href="#pricing"
               className="text-gray-600 hover:text-black transition-colors"
             >
@@ -317,6 +323,97 @@ export default function Component() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl lg:text-5xl font-bold mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Everything you need to know about XpectViral
+            </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto space-y-8">
+            {/* FAQ Item 1 */}
+            <Card className="bg-gray-50 border-gray-200 p-6">
+              <CardContent className="p-0">
+                <h3 className="text-xl font-bold mb-3 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                    <Zap className="w-4 h-4 text-white" />
+                  </div>
+                  What exactly is XpectViral?
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed ml-11">
+                  XpectViral is a lightweight Chrome extension that automatically detects tweets with unusual velocity in your X feed. Instead of shouting into the void, it helps you reply smartly to the right tweets at the right time to maximize your visibility and gain real followers.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* FAQ Item 2 */}
+            <Card className="bg-gray-50 border-gray-200 p-6">
+              <CardContent className="p-0">
+                <h3 className="text-xl font-bold mb-3 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                    <Eye className="w-4 h-4 text-white" />
+                  </div>
+                  How does the tool integrate with X's interface?
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed ml-11">
+                  The extension integrates directly into your X.com feed without modifying the interface. It simply adds discrete badges (🔥 for hot posts still growing, ⭐️ for emerging tweets) that let you instantly spot engagement opportunities.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* FAQ Item 3 */}
+            <Card className="bg-gray-50 border-gray-200 p-6">
+              <CardContent className="p-0">
+                <h3 className="text-xl font-bold mb-3 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                    <Clock className="w-4 h-4 text-white" />
+                  </div>
+                  When will I receive alerts or badges?
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed ml-11">
+                  Badges appear instantly as soon as you load your feed. The algorithm detects unusual velocity in real-time - so you can reply to emerging tweets before they explode, or quote-tweet hot posts while they're still generating massive traffic.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* FAQ Item 4 */}
+            <Card className="bg-gray-50 border-gray-200 p-6">
+              <CardContent className="p-0">
+                <h3 className="text-xl font-bold mb-3 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                    <Users className="w-4 h-4 text-white" />
+                  </div>
+                  What do I get by joining the waitlist now?
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed ml-11">
+                  By joining the waitlist now, you get priority access at launch, your $5 price is locked for life, and you'll receive exclusive updates. Most importantly: you'll be among the first to use this strategy to grow your X audience smartly instead of shouting into the void.
+                </p>
+              </CardContent>
+            </Card>
+
+            {/* FAQ Item 5 */}
+            <Card className="bg-gray-50 border-gray-200 p-6">
+              <CardContent className="p-0">
+                <h3 className="text-xl font-bold mb-3 flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center mr-3">
+                    <Star className="w-4 h-4 text-white" />
+                  </div>
+                  How do you detect "Rising Stars"?
+                </h3>
+                <p className="text-gray-600 text-lg leading-relaxed ml-11">
+                  The algorithm detects tweets with "unusual velocity" - meaning those gaining engagement faster than normal for their context. The ⭐️ "Rising Stars" are fresh tweets with early signs of blowing up, perfect for engaging replies that will be seen by thousands of people.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
