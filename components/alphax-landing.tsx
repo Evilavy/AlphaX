@@ -29,6 +29,7 @@ import HeroScrollDemo from "@/components/container-scroll-animation-demo";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
+import HeroVideoDialog from "@/components/magicui/hero-video-dialog";
 
 export default function Component() {
   const [email, setEmail] = useState("");
@@ -131,6 +132,182 @@ export default function Component() {
       <div className="hero-scroll-section">
         <HeroScrollDemo />
       </div>
+
+      {/* Presentation video */}
+      <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="text-center mb-12"
+          >
+            <Badge className="mb-4 bg-gradient-to-r from-black to-gray-600 text-white">
+              <BarChart3 className="w-4 h-4 mr-2" />
+              Real Results
+            </Badge>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              From Score 86 to 3K Views
+            </h2>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Watch the founder explain how XpectViral spotted a rising tweet
+              and turned it into massive leverage
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="w-full flex justify-center items-center relative"
+          >
+            {/* Animated background elements */}
+            <div className="absolute inset-0 pointer-events-none">
+              {/* Floating particles */}
+              {[...Array(8)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 bg-gradient-to-r from-black to-gray-400 rounded-full opacity-20"
+                  style={{
+                    left: `${20 + i * 10}%`,
+                    top: `${20 + (i % 3) * 30}%`,
+                  }}
+                  animate={{
+                    y: [-10, 10, -10],
+                    x: [-5, 5, -5],
+                    opacity: [0.2, 0.5, 0.2],
+                  }}
+                  transition={{
+                    duration: 3 + i * 0.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.2,
+                  }}
+                />
+              ))}
+
+              {/* Pulse rings */}
+              <motion.div
+                className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[600px] border border-black/10 rounded-2xl"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.2, 0.1, 0.2],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.div
+                className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[700px] border border-black/5 rounded-2xl"
+                animate={{
+                  scale: [1, 1.05, 1],
+                  opacity: [0.1, 0.05, 0.1],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 1,
+                }}
+              />
+            </div>
+
+            {/* Main video container */}
+            <motion.div
+              className="relative max-w-[900px] group cursor-pointer"
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
+              {/* Glowing border effect */}
+              <motion.div
+                className="absolute -inset-4 bg-gradient-to-r from-black/20 via-gray-400/20 to-black/20 rounded-3xl opacity-0 group-hover:opacity-100"
+                transition={{ duration: 0.5 }}
+              />
+
+              {/* Click indicator */}
+              <motion.div
+                className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-black text-white px-4 py-2 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 z-10"
+                initial={{ y: 10, opacity: 0 }}
+                whileHover={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="flex items-center space-x-2">
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                  >
+                    ▶
+                  </motion.div>
+                  <span>Click to watch the demo</span>
+                </div>
+              </motion.div>
+
+              {/* Pulsing attention grabber */}
+              <motion.div
+                className="absolute -top-4 -right-4 w-4 h-4 bg-red-500 rounded-full z-10"
+                animate={{
+                  scale: [1, 1.5, 1],
+                  opacity: [1, 0.5, 1],
+                }}
+                transition={{
+                  duration: 2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+
+              {/* Video component with enhanced styling */}
+              <div className="relative rounded-[10px] overflow-hidden shadow-2xl">
+                <video controls>
+                  <source src="presentation.mp4" type="video/webm" />
+                </video>
+
+                {/* Overlay gradient for better visual appeal */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
+              </div>
+
+              {/* Corner accents */}
+              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.div>
+          </motion.div>
+
+          {/* Call-to-action below video */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="text-center mt-12"
+          >
+            <div className="flex items-center justify-center space-x-4 text-gray-600">
+              <div className="flex items-center space-x-2">
+                <motion.div
+                  className="w-2 h-2 bg-black rounded-full"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                />
+                <span className="text-sm font-medium">1 min presentation</span>
+              </div>
+              <div className="w-px h-4 bg-gray-300" />
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium">See how it works</span>
+                <motion.div
+                  className="w-2 h-2 bg-black rounded-full"
+                  animate={{ scale: [1, 1.5, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                />
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Before/After Section*/}
       <section className="py-20 bg-black">
