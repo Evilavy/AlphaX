@@ -37,6 +37,8 @@ export default function Component() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState("up");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,6 +85,36 @@ export default function Component() {
     }
   };
 
+  // Handle scroll detection and direction
+  React.useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const updateScrollDirection = () => {
+      const scrollY = window.scrollY;
+
+      if (Math.abs(scrollY - lastScrollY) < 10) {
+        ticking = false;
+        return;
+      }
+
+      setScrollDirection(scrollY > lastScrollY ? "down" : "up");
+      setIsScrolled(scrollY > 20);
+      lastScrollY = scrollY > 0 ? scrollY : 0;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateScrollDirection);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <div className="min-h-screen bg-white text-black overflow-x-hidden">
       {/* Video SEO Schema */}
@@ -96,7 +128,7 @@ export default function Component() {
             description:
               "Watch the founder of XpectViral demonstrate how the tool spots high-velocity tweets. See a real example of a tweet with a score of 86, and learn how early engagement could lead to 3,000 impressions and 30 potential clients. Stop guessing and start acting smarter on X.",
             thumbnailUrl: "https://www.xpectviral.com/thumb.png",
-            uploadDate: "2024-07-29", // Please update with the actual upload date
+            uploadDate: "2025-06-28",
             duration: "PT1M",
             contentUrl: "https://www.xpectviral.com/presentation.mp4",
             embedUrl: "https://www.xpectviral.com/",
@@ -104,14 +136,54 @@ export default function Component() {
         }}
       />
       {/* Header */}
-      <header className="border-b border-gray-200">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center">
-              <Zap className="w-5 h-5 text-white" />
-            </div>
-            <span className="text-xl font-bold">XpectViral</span>
-          </div>
+      <motion.header
+        className="fixed top-0 left-0 right-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur-sm"
+        animate={{
+          height: isScrolled ? "60px" : "80px",
+        }}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+      >
+        <motion.div
+          className="mx-auto px-4 flex items-center justify-between h-full"
+          animate={{
+            maxWidth: isScrolled ? "800px" : "1200px",
+            paddingLeft: isScrolled ? "12px" : "16px",
+            paddingRight: isScrolled ? "12px" : "16px",
+            paddingTop: isScrolled ? "8px" : "16px",
+            paddingBottom: isScrolled ? "8px" : "16px",
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <motion.div
+            className="flex items-center space-x-2"
+            animate={{
+              scale: isScrolled ? 0.9 : 1,
+            }}
+            transition={{ duration: 0.3 }}
+          >
+            <motion.div
+              className="bg-gradient-to-r from-black to-gray-600 rounded-lg flex items-center justify-center"
+              animate={{
+                width: isScrolled ? "28px" : "32px",
+                height: isScrolled ? "28px" : "32px",
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              <Zap
+                className={`text-white ${isScrolled ? "w-4 h-4" : "w-5 h-5"}`}
+              />
+            </motion.div>
+            <motion.span
+              className="font-bold"
+              animate={{
+                fontSize: isScrolled ? "18px" : "20px",
+              }}
+              transition={{ duration: 0.3 }}
+            >
+              XpectViral
+            </motion.span>
+          </motion.div>
+
           <nav className="hidden md:flex items-center space-x-6">
             <Link
               href="#features"
@@ -138,15 +210,26 @@ export default function Component() {
               Pricing
             </Link>
           </nav>
-          <Button
-            variant="outline"
-            className="cursor-pointer bg-transparent border-black text-black hover:bg-black hover:text-white"
-            onClick={scrollToSignup}
+
+          <motion.div
+            animate={{
+              scale: isScrolled ? 0.9 : 1,
+            }}
+            transition={{ duration: 0.3 }}
           >
-            Join the Waitlist
-          </Button>
-        </div>
-      </header>
+            <Button
+              variant="outline"
+              className="cursor-pointer bg-transparent border-black text-black hover:bg-black hover:text-white"
+              onClick={scrollToSignup}
+            >
+              Join the Waitlist
+            </Button>
+          </motion.div>
+        </motion.div>
+      </motion.header>
+
+      {/* Spacer to prevent content from jumping */}
+      <div className="h-20"></div>
       <div className="hero-scroll-section">
         <HeroScrollDemo />
       </div>
@@ -184,24 +267,49 @@ export default function Component() {
             {/* Animated background elements */}
             <div className="absolute inset-0 pointer-events-none">
               {/* Floating particles */}
-              {[...Array(8)].map((_, i) => (
+              {[...Array(20)].map((_, i) => (
                 <motion.div
                   key={i}
-                  className="absolute w-2 h-2 bg-gradient-to-r from-black to-gray-400 rounded-full opacity-20"
+                  className="absolute bg-gradient-to-r from-black to-gray-400 rounded-full opacity-20"
                   style={{
-                    left: `${20 + i * 10}%`,
-                    top: `${20 + (i % 3) * 30}%`,
+                    width: `${Math.random() * 6 + 2}px`,
+                    height: `${Math.random() * 6 + 2}px`,
+                    left: `${Math.random() * 90 + 5}%`,
+                    top: `${Math.random() * 80 + 10}%`,
                   }}
                   animate={{
-                    y: [-10, 10, -10],
-                    x: [-5, 5, -5],
-                    opacity: [0.2, 0.5, 0.2],
+                    y: [-15, 15, -15],
+                    x: [-8, 8, -8],
+                    opacity: [0.1, 0.6, 0.1],
+                    scale: [0.8, 1.2, 0.8],
                   }}
                   transition={{
-                    duration: 3 + i * 0.5,
+                    duration: 4 + Math.random() * 3,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: i * 0.2,
+                    delay: Math.random() * 2,
+                  }}
+                />
+              ))}
+
+              {/* Additional sparkle particles */}
+              {[...Array(12)].map((_, i) => (
+                <motion.div
+                  key={`sparkle-${i}`}
+                  className="absolute w-1 h-1 bg-black rounded-full opacity-30"
+                  style={{
+                    left: `${15 + Math.random() * 70}%`,
+                    top: `${15 + Math.random() * 70}%`,
+                  }}
+                  animate={{
+                    opacity: [0, 1, 0],
+                    scale: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: i * 0.3,
                   }}
                 />
               ))}
@@ -291,13 +399,23 @@ export default function Component() {
                   Your browser does not support the video tag.
                 </video>
               </div>
-
-              {/* Corner accents */}
-              <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Publication date */}
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                viewport={{ once: true }}
+                className="absolute -bottom-8 left-0 text-sm text-gray-500 flex items-center space-x-2"
+              >
+                <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
+                <span className="italic text-xs">06/28/2025</span>
+              </motion.div>
             </motion.div>
+            {/* Corner accents */}
+            <div className="absolute top-4 left-4 w-6 h-6 border-l-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute top-4 right-4 w-6 h-6 border-r-2 border-t-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute bottom-4 left-4 w-6 h-6 border-l-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute bottom-4 right-4 w-6 h-6 border-r-2 border-b-2 border-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
           </motion.div>
 
           {/* Call-to-action below video */}

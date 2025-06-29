@@ -13,22 +13,79 @@ import * as React from "react";
 const ConfirmationEmail = () => (
   <Html>
     <Head />
-    <Preview>You're on the waitlist!</Preview>
-    <Body style={main}>
-      <Container style={container}>
-        <Heading style={h1}>Thanks for joining the waitlist!</Heading>
-        <Text style={text}>
-          You're now on the list for XpectViral. We'll let you know as soon
-          as we launch.
+    <Preview>You're on the waitlist — big things ahead.</Preview>
+    <Body
+      style={{
+        backgroundColor: "#0f0f0f",
+        fontFamily: "Helvetica, Arial, sans-serif",
+        color: "#ffffff",
+        padding: "40px 0",
+      }}
+    >
+      <Container
+        style={{
+          maxWidth: "600px",
+          margin: "0 auto",
+          backgroundColor: "#1a1a1a",
+          borderRadius: "12px",
+          padding: "40px",
+          boxShadow: "0 0 20px rgba(255,255,255,0.05)",
+        }}
+      >
+        <Heading
+          style={{
+            fontSize: "28px",
+            fontWeight: "bold",
+            marginBottom: "24px",
+            color: "#ffffff",
+          }}
+        >
+          Welcome to XpectViral 👋
+        </Heading>
+        <Text
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.6",
+            marginBottom: "20px",
+            color: "#dddddd",
+          }}
+        >
+          You’re officially on the waitlist. Thanks for hopping on early,
+          you’ll be the first to know when we go live.
         </Text>
-        <Text style={text}>
-          In the meantime, you can follow me on{" "}
-          <Link href="https://x.com/evi_1k" style={link}>
+        <Text
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.6",
+            marginBottom: "20px",
+            color: "#dddddd",
+          }}
+        >
+          Until then, I’m sharing behind-the-scenes progress and launch updates
+          on{" "}
+          <Link
+            href="https://x.com/evi_1k"
+            style={{
+              color: "#00bcd4",
+              textDecoration: "none",
+              fontWeight: "bold",
+            }}
+          >
             X
-          </Link>{" "}
-          for updates.
+          </Link>
+          . Feel free to follow along!
         </Text>
-        <Text style={text}>— The XpectViral Team</Text>
+        <Text
+          style={{
+            fontSize: "16px",
+            lineHeight: "1.6",
+            marginTop: "30px",
+            color: "#888888",
+          }}
+        >
+          Talk soon,
+          <br />— The XpectViral Team
+        </Text>
       </Container>
     </Body>
   </Html>
@@ -68,4 +125,4 @@ const text = {
 const link = {
   color: "#0070f3",
   textDecoration: "underline",
-}; 
+};
