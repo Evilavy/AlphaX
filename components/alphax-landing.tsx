@@ -85,6 +85,24 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-white text-black overflow-x-hidden">
+      {/* Video SEO Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "VideoObject",
+            name: "XpectViral: Founder's Presentation & Demo",
+            description:
+              "Watch the founder of XpectViral demonstrate how the tool spots high-velocity tweets. See a real example of a tweet with a score of 86, and learn how early engagement could lead to 3,000 impressions and 30 potential clients. Stop guessing and start acting smarter on X.",
+            thumbnailUrl: "https://www.xpectviral.com/thumb.png",
+            uploadDate: "2024-07-29", // Please update with the actual upload date
+            duration: "PT1M",
+            contentUrl: "https://www.xpectviral.com/presentation.mp4",
+            embedUrl: "https://www.xpectviral.com/",
+          }),
+        }}
+      />
       {/* Header */}
       <header className="border-b border-gray-200">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
