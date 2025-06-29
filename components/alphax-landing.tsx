@@ -262,12 +262,16 @@ export default function Component() {
 
               {/* Video component with enhanced styling */}
               <div className="relative rounded-[10px] overflow-hidden shadow-2xl">
-                <video controls>
-                  <source src="presentation.mp4" type="video/webm" />
+                <video
+                  controls
+                  playsInline
+                  poster="/thumb.png"
+                  preload="metadata"
+                  className="w-full h-full"
+                >
+                  <source src="/presentation.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
                 </video>
-
-                {/* Overlay gradient for better visual appeal */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
               </div>
 
               {/* Corner accents */}
@@ -310,7 +314,7 @@ export default function Component() {
       </section>
 
       {/* Before/After Section*/}
-      <section className="py-20 bg-black">
+      <section className="py-20 bg-black overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <Badge className="mb-4 bg-white text-black">
