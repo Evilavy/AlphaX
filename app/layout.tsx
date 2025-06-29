@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "XpectViral: Your Unfair Advantage on X",
-  description: "Stop guessing. XpectViral is a Chrome extension that scores tweets in real-time to reveal their true viral potential.",
+  description: "XpectViral spots tweets that are gaining momentum so you can jump in at the right time, boost your visibility, and grow your audience—without spamming or guessing.",
 };
 
 export default function RootLayout({
