@@ -397,7 +397,7 @@ export default function HeroScrollDemo() {
                       initial={{ opacity: 0, y: 20, scale: 0.9 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       transition={{ delay: 1 + i * 0.2, duration: 0.6 }}
-                      className="bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700 rounded-xl p-6 text-center relative overflow-hidden shadow-2xl"
+                      className="bg-gradient-to-br from-gray-900 via-black to-gray-800 border border-gray-700 rounded-xl p-4 md:p-6 text-center relative overflow-hidden shadow-2xl"
                     >
                       <motion.div
                         className="absolute inset-0 rounded-xl opacity-30"
@@ -424,13 +424,13 @@ export default function HeroScrollDemo() {
                       <div className="absolute inset-0 opacity-10">
                         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[length:20px_20px]" />
                       </div>
-                      <metric.icon className="w-8 h-8 text-white mx-auto mb-3 relative z-10" />
+                      <metric.icon className="w-6 h-6 md:w-8 md:h-8 text-white mx-auto mb-2 md:mb-3 relative z-10" />
                       <div className="text-white relative z-10">
                         <span className="font-bold text-2xl md:text-3xl">
                           +{metric.value}%
                         </span>
                       </div>
-                      <p className="text-gray-200 font-medium mt-2 relative z-10">
+                      <p className="text-gray-200 font-medium mt-1 md:mt-2 relative z-10">
                         {metric.label}
                       </p>
                       <p className="text-gray-400 text-sm mt-1 relative z-10">
