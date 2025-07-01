@@ -94,11 +94,15 @@ export default function HeroScrollDemo() {
         titleComponent={
           <>
             <h1 className="px-8 sm:py-0 text-3xl md:text-5xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-black via-gray-700 to-gray-500 bg-clip-text text-transparent">
-              Stop Guessing. See What's About to{" "}
-              <span className="">Blow Up on X</span>.
+              Spot high-velocity tweets early and{" "}
+              <span>
+                <em>BOOST</em> your impressions
+              </span>
+              .
             </h1>
+
             <p className="px-8 sm:py-0 text-md md:text-xl lg:text-2xl text-gray-600 mb-0 md:mb-12 max-w-3xl mx-auto leading-relaxed mt-6">
-              Spot high-momentum tweets early and engage before everyone else
+              Spot high-velocity tweets early and engage before everyone else
               Gain visibility by riding the wave directly from your timeline
             </p>
           </>
