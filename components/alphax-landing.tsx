@@ -39,6 +39,8 @@ export default function Component() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [scrollDirection, setScrollDirection] = useState("up");
+  const [particles, setParticles] = useState<any[]>([]);
+  const [sparkles, setSparkles] = useState<any[]>([]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -113,6 +115,26 @@ export default function Component() {
 
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Generate particles on client-side to avoid hydration errors
+  React.useEffect(() => {
+    const generatedParticles = [...Array(20)].map(() => ({
+      width: `${Math.random() * 6 + 2}px`,
+      height: `${Math.random() * 6 + 2}px`,
+      left: `${Math.random() * 90 + 5}%`,
+      top: `${Math.random() * 80 + 10}%`,
+      duration: 4 + Math.random() * 3,
+      delay: Math.random() * 2,
+    }));
+    setParticles(generatedParticles);
+
+    const generatedSparkles = [...Array(12)].map((_, i) => ({
+      left: `${15 + Math.random() * 70}%`,
+      top: `${15 + Math.random() * 70}%`,
+      delay: i * 0.3,
+    }));
+    setSparkles(generatedSparkles);
   }, []);
 
   return (
@@ -267,15 +289,15 @@ export default function Component() {
             {/* Animated background elements */}
             <div className="absolute inset-0 pointer-events-none">
               {/* Floating particles */}
-              {[...Array(20)].map((_, i) => (
+              {particles.map((particle, i) => (
                 <motion.div
                   key={i}
                   className="absolute bg-gradient-to-r from-black to-gray-400 rounded-full opacity-20"
                   style={{
-                    width: `${Math.random() * 6 + 2}px`,
-                    height: `${Math.random() * 6 + 2}px`,
-                    left: `${Math.random() * 90 + 5}%`,
-                    top: `${Math.random() * 80 + 10}%`,
+                    width: particle.width,
+                    height: particle.height,
+                    left: particle.left,
+                    top: particle.top,
                   }}
                   animate={{
                     y: [-15, 15, -15],
@@ -284,22 +306,22 @@ export default function Component() {
                     scale: [0.8, 1.2, 0.8],
                   }}
                   transition={{
-                    duration: 4 + Math.random() * 3,
+                    duration: particle.duration,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: Math.random() * 2,
+                    delay: particle.delay,
                   }}
                 />
               ))}
 
               {/* Additional sparkle particles */}
-              {[...Array(12)].map((_, i) => (
+              {sparkles.map((sparkle, i) => (
                 <motion.div
                   key={`sparkle-${i}`}
                   className="absolute w-1 h-1 bg-black rounded-full opacity-30"
                   style={{
-                    left: `${15 + Math.random() * 70}%`,
-                    top: `${15 + Math.random() * 70}%`,
+                    left: sparkle.left,
+                    top: sparkle.top,
                   }}
                   animate={{
                     opacity: [0, 1, 0],
@@ -309,7 +331,7 @@ export default function Component() {
                     duration: 2,
                     repeat: Infinity,
                     ease: "easeInOut",
-                    delay: i * 0.3,
+                    delay: sparkle.delay,
                   }}
                 />
               ))}

@@ -327,7 +327,7 @@ export default function HeroScrollDemo() {
                     <Users className="w-4 h-4" />
                     <span>
                       {waitlistCount !== null
-                        ? `Join the hunters, on the way to millions`
+                        ? `Join ${waitlistCount} hunters, on the way to millions`
                         : "Loading..."}
                     </span>
                   </div>
