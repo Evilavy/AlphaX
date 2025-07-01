@@ -20,6 +20,17 @@ import {
   Sparkles,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { AvatarCircles } from "./magicui/avatar-circles";
+import { supabase } from "@/lib/supabase";
+import { toast } from "sonner";
+
+const avatarUrls = [
+  { imageUrl: "/pp1.jpg", profileUrl: "#" },
+  { imageUrl: "/pp2.jpg", profileUrl: "#" },
+  { imageUrl: "/pp3.jpg", profileUrl: "#" },
+  { imageUrl: "/pp4.png", profileUrl: "#" },
+  { imageUrl: "/pp5.jpg", profileUrl: "#" },
+];
 
 export default function HeroScrollDemo() {
   const [email, setEmail] = useState("");
@@ -318,16 +329,31 @@ export default function HeroScrollDemo() {
                   transition={{ delay: 1 }}
                 >
                   <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4" />
                     <span>
-                      {waitlistCount !== null
-                        ? `Join ${waitlistCount} hunters, on the way to millions`
-                        : "Loading..."}
+                      {waitlistCount !== null ? (
+                        <div className="flex flex-col items-center justify-center">
+                          <AvatarCircles
+                            avatarUrls={avatarUrls}
+                            numPeople={
+                              waitlistCount > 4 ? waitlistCount - 5 : undefined
+                            }
+                          />
+                          <div className="flex items-center gap-2 mt-2">
+                            <Users className="w-4 h-4" />
+                            <p className="text-sm text-gray-500">
+                              Join {waitlistCount} hunters, on the way to
+                              millions
+                            </p>
+                          </div>
+                          <div className="flex items-center space-x-2 mt-2">
+                            <Shield className="w-4 h-4" />
+                            <span>Chrome Extension</span>
+                          </div>
+                        </div>
+                      ) : (
+                        "Loading..."
+                      )}
                     </span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Shield className="w-4 h-4" />
-                    <span>Chrome Extension</span>
                   </div>
                 </motion.div>
               </div>
