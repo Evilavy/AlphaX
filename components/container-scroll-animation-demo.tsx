@@ -307,12 +307,6 @@ export default function HeroScrollDemo() {
                           </motion.div>
                         )}
                       </AnimatePresence>
-
-                      {!error && (
-                        <p className="text-sm text-gray-500 mb-8">
-                          Join the waitlist to be the first to get access
-                        </p>
-                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>
