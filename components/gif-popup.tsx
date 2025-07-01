@@ -7,11 +7,16 @@ export default function GifPopup() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 8000); // 5 secondes
+    const hasPopupBeenShown = localStorage.getItem('gifPopupShown');
 
-    return () => clearTimeout(timer);
+    if (!hasPopupBeenShown) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+        localStorage.setItem('gifPopupShown', 'true');
+      }, 8000); // 8 secondes
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   if (!isVisible) return null;
