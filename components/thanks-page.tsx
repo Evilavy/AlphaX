@@ -10,7 +10,7 @@ export default function ThanksPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-gray-900 text-white overflow-hidden relative pt-6">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-950 to-gray-900 text-white overflow-hidden relative pt-12">
       {/* Chrome/Metallic Background effects */}
       <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5"></div>
       <div className="absolute top-0 left-1/3 w-96 h-96 bg-gradient-to-br from-white/10 via-white/5 to-transparent rounded-full blur-3xl"></div>
