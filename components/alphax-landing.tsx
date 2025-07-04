@@ -1180,13 +1180,13 @@ export default function Component() {
             </div>
 
             <div className="flex items-center space-x-6 text-sm text-gray-500">
-              <Link href="#" className="hover:text-black transition-colors">
+              <Link href="/privacy-policy" className="hover:text-black transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="#" className="hover:text-black transition-colors">
+              <Link href="/terms-of-service" className="hover:text-black transition-colors">
                 Terms of Service
               </Link>
-              <Link href="#" className="hover:text-black transition-colors">
+              <Link href="mailto:contact@xpectviral.com" className="hover:text-black transition-colors">
                 Contact
               </Link>
             </div>
