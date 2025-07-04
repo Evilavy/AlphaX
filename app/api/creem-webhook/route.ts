@@ -1,13 +1,14 @@
-// pages/api/creem-webhook.ts
-import { NextApiRequest, NextApiResponse } from "next";
+
+// app/api/creem-webhook/route.ts
+import { NextResponse } from 'next/server';
 import * as crypto from 'crypto';
-import { createClient } from "@supabase/supabase-js";
+import { createClient } from '@supabase/supabase-js';
 
 // Simple CORS headers; replace or extend with your own if needed
 const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, OPTIONS",
-  "Access-Control-Allow-Headers": "Content-Type, creem-signature",
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+  'Access-Control-Allow-Headers': 'Content-Type, creem-signature',
 };
 
 function generateSignature(payload: string, secret: string): string {
@@ -17,65 +18,59 @@ function generateSignature(payload: string, secret: string): string {
     .digest('hex');
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  // Handle preflight
-  if (req.method === "OPTIONS") {
-    Object.entries(corsHeaders).forEach(([k, v]) => res.setHeader(k, v));
-    return res.status(204).end();
-  }
+export async function OPTIONS() {
+  return NextResponse.json(null, {
+    status: 204,
+    headers: corsHeaders,
+  });
+}
 
-  if (req.method !== "POST") {
-    res.setHeader("Allow", "POST");
-    return res.status(405).json({ error: "Method not allowed" });
-  }
-
+export async function POST(request: Request) {
   // Apply CORS headers
-  Object.entries(corsHeaders).forEach(([k, v]) => res.setHeader(k, v));
+  const headers = new Headers(corsHeaders);
 
-  // Grab and validate the signature header
-  const signature = req.headers["creem-signature"];
-  if (!signature || Array.isArray(signature)) {
-    return res.status(401).send("Signature manquante");
+  // Retrieve signature header
+  const signature = request.headers.get('creem-signature');
+  if (!signature) {
+    return new NextResponse('Signature manquante', { status: 401, headers });
   }
 
-  // Stringify the parsed JSON body for HMAC verification
-  let bodyText: string;
-  try {
-    bodyText = JSON.stringify(req.body);
-  } catch (err) {
-    console.error("Error serializing body:", err);
-    return res.status(400).send("Invalid JSON body");
-  }
+  // Read raw body text
+  const bodyText = await request.text();
 
-  // Verify HMAC using the helper
-  const SECRET = process.env.CREEM_WEBHOOK_SECRET || "";
+  // Verify HMAC
+  const SECRET = process.env.CREEM_WEBHOOK_SECRET || '';
   const computedSignature = generateSignature(bodyText, SECRET);
 
-  console.log("=== DEBUG WEBHOOK ===");
-  console.log("All headers:", req.headers);
-  console.log("Body:", bodyText);
-  console.log("Computed Signature:", computedSignature);
-  console.log("=== END DEBUG ===");
+  console.log('=== DEBUG WEBHOOK ===');
+  console.log('Headers:', Object.fromEntries(request.headers.entries()));
+  console.log('Body:', bodyText);
+  console.log('Computed Signature:', computedSignature);
+  console.log('=== END DEBUG ===');
 
   if (computedSignature !== signature) {
-    console.error("Signature invalide !");
-    return res.status(401).send("Signature invalide");
+    console.error('Signature invalide !');
+    return new NextResponse('Signature invalide', { status: 401, headers });
   }
 
-  // Parse event (we already have it as req.body)
-  const event = req.body;
+  // Parse JSON event
+  let event: any;
+  try {
+    event = JSON.parse(bodyText);
+  } catch (err) {
+    console.error('Invalid JSON:', err);
+    return new NextResponse('Invalid JSON body', { status: 400, headers });
+  }
 
-  if (event.eventType === "checkout.completed") {
+  if (event.eventType === 'checkout.completed') {
     const session = event.object;
     const supabaseUserId = session.metadata?.supabase_user_id;
     if (!supabaseUserId) {
-      console.error("Supabase user ID not found in metadata");
-      return res
-        .status(400)
-        .send("Webhook Error: Supabase user ID not found");
+      console.error('Supabase user ID not found in metadata');
+      return new NextResponse(
+        'Webhook Error: Supabase user ID not found',
+        { status: 400, headers }
+      );
     }
 
     console.log(
@@ -83,20 +78,24 @@ export default async function handler(
     );
 
     const supabaseAdmin = createClient(
-      process.env.SUPABASE_URL ?? "",
-      process.env.SUPABASE_SERVICE_ROLE_KEY ?? ""
+      process.env.SUPABASE_URL ?? '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY ?? ''
     );
 
     const { error } = await supabaseAdmin
-      .from("profiles")
+      .from('profiles')
       .update({ has_paid: true })
-      .eq("id", supabaseUserId);
+      .eq('id', supabaseUserId);
 
     if (error) {
-      console.error("Error updating profile:", error);
-      return res
-        .status(500)
-        .json({ error: "Webhook handler error", details: error.message });
+      console.error('Error updating profile:', error);
+      return new NextResponse(
+        JSON.stringify({
+          error: 'Webhook handler error',
+          details: error.message,
+        }),
+        { status: 500, headers }
+      );
     }
 
     console.log(`User ${supabaseUserId} marked as paid.`);
@@ -105,5 +104,8 @@ export default async function handler(
   }
 
   // Acknowledge receipt
-  return res.status(200).json({ received: true });
+  return new NextResponse(JSON.stringify({ received: true }), {
+    status: 200,
+  });
 }
+
