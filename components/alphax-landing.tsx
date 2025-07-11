@@ -491,6 +491,26 @@ export default function Component() {
                 Low engagement but showing early signs of momentum
               </motion.h4>
               <motion.div
+                className="ml-[5px] mt-2"
+                initial={{ x: -60, opacity: 0, y: 15 }}
+                whileInView={{ x: 0, opacity: 1, y: 0 }}
+                transition={{
+                  duration: 0.4,
+                  delay: 0.25,
+                  ease: [0.25, 0.46, 0.45, 0.94],
+                }}
+                viewport={{ once: true }}
+              >
+                <a
+                  href="https://x.com/evi_1k/status/1942944356626804747"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-blue-400 hover:underline"
+                >
+                  (check it out here)
+                </a>
+              </motion.div>
+              <motion.div
                 className="relative w-fit"
                 initial={{ x: -120, opacity: 0, scale: 0.8, rotateX: -10 }}
                 whileInView={{ x: 0, opacity: 1, scale: 1, rotateX: 0 }}
