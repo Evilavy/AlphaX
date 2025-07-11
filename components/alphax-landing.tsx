@@ -539,7 +539,7 @@ export default function Component() {
                 <motion.img
                   src="arrow.svg"
                   alt=""
-                  className="absolute left-[55%] transform -translate-x-1/2 -bottom-[160px] hidden lg:block"
+                  className="absolute left-[65%] transform -translate-x-1/2 -bottom-[140px] hidden lg:block"
                   initial={{
                     opacity: 0,
                     scale: 0.3,
