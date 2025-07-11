@@ -22,6 +22,7 @@ import {
   Heart,
   MessageCircle,
   Repeat2,
+  X,
 } from "lucide-react";
 import { BoxReveal } from "@/components/magicui/box-reveal";
 import Link from "next/link";
@@ -37,6 +38,7 @@ export default function Component() {
   const [scrollDirection, setScrollDirection] = useState("up");
   const [particles, setParticles] = useState<any[]>([]);
   const [sparkles, setSparkles] = useState<any[]>([]);
+  const [showHunterBanner, setShowHunterBanner] = useState(true);
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -94,6 +96,37 @@ export default function Component() {
 
   return (
     <div className="min-h-screen bg-white text-black overflow-x-hidden">
+      <AnimatePresence>
+        {showHunterBanner && (
+          <div className="absolute top-24 left-1/2 -translate-x-1/2 z-50">
+            <motion.div
+              layout
+              initial={{ y: -20, opacity: 0, scale: 0.9 }}
+              animate={{ y: 0, opacity: 1, scale: 1 }}
+              exit={{ y: -20, opacity: 0, scale: 0.9 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="flex cursor-pointer items-center space-x-3 rounded-full border border-gray-200 bg-white px-4 py-2 shadow-md"
+              onClick={() => setShowHunterBanner(false)}
+            >
+              <motion.div
+                className="h-2.5 w-2.5 rounded-full bg-gray-700"
+                animate={{
+                  scale: [1, 1.4, 1],
+                  opacity: [1, 0.8, 1],
+                }}
+                transition={{
+                  duration: 1.2,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              />
+              <p className="text-sm font-medium text-gray-700">
+                4 hunters joined this week!
+              </p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
       {/* Video SEO Schema */}
       <script
         type="application/ld+json"
