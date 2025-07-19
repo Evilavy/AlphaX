@@ -55,7 +55,7 @@ export default function ThanksPage() {
               </h2>
               <div className="flex justify-center mb-4">
                 <img
-                  src="/click-to-activate.gif"
+                  src="/welcome-thanks-gif.gif"
                   alt="Click to activate XpectViral extension"
                   className="rounded-lg border border-white/20 shadow-lg max-w-full h-auto"
                 />
