@@ -249,7 +249,7 @@ export default function Component() {
         <HeroScrollDemo />
       </div>
 
-      {/* Presentation video */}
+      {/* Presentation video ! */}
       <section className="pb-20 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
           <motion.div
