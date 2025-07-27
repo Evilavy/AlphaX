@@ -121,7 +121,7 @@ export default function Component() {
                 }}
               />
               <p className="text-sm font-medium text-gray-700">
-                4 hunters joined this week!
+                1 hunter joined this week!
               </p>
             </motion.div>
           </div>
