@@ -164,7 +164,7 @@ export default function HeroScrollDemo() {
                           <img src="LogoFast-Icon.png" alt="" />
                         </motion.div>
                         <span className="text-white font-semibold text-lg tracking-wide">
-                          Download on the Chrome Store
+                        Get Started for Free
                         </span>
                       </div>
 
