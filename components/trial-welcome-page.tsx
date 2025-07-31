@@ -41,9 +41,9 @@ export default function TrialWelcomePage() {
             <span className="bg-gradient-to-r from-white via-gray-100 to-white bg-clip-text text-transparent font-bold">
               XpectViral
             </span>
-            ! You now have a free trial for your{" "}
+            ! You now have a free trial for the{" "}
             <span className="bg-gradient-to-r from-green-400 via-green-300 to-green-500 bg-clip-text text-transparent font-bold">
-              first 150 tweets
+              first 24 hours
             </span>
             .
           </p>
@@ -60,8 +60,7 @@ export default function TrialWelcomePage() {
                 <span className="text-green-400 text-xl">🎉</span>
               </div>
               <p className="text-green-200 text-sm sm:text-base">
-                Enjoy all premium features to analyze your first 150 loaded
-                tweets!
+                Enjoy all premium features for the first 24 hours!
               </p>
             </div>
           </div>
